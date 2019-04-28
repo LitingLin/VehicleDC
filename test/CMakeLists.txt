@@ -4,8 +4,6 @@ project(basic_test)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_LIST_DIR}/cmake/")
 find_package(TurboJPEG)
 if(TURBOJPEG_FOUND)
-    enable_testing()
-
     add_executable(basic_test test.cpp jpeg_decoder.cpp)
 
     set(TESTING_PY_MODULE_PATH ${CMAKE_SOURCE_DIR}/share/py_module)

@@ -46,6 +46,7 @@ install(DIRECTORY share/ DESTINATION share/${CMAKE_PROJECT_NAME})
 
 option(BUILD_TEST "Build the tests" ON)
 if(BUILD_TEST)
+    enable_testing()
     add_subdirectory(test)
 endif()
 
