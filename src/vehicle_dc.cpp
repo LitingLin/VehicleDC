@@ -10,7 +10,7 @@
 
 struct Context {
     std::string errorString;
-    std::unique_ptr<VehicleDetectorAndClassifierPyWrapper> ptr;
+    VehicleDetectorAndClassifierPyWrapper *ptr;
     std::string pyModulePath = VEHICLE_DC_PY_MODULE_PATH;
     std::string modelPath = VEHICLE_DC_MODEL_PATH;
     std::vector<VehicleDetectorAndClassifierPyWrapper::Result> results;
@@ -33,7 +33,9 @@ try {
 
 int VehicleDCInitialize() {
     BEGIN_EXCEPTION_SAFE_EXECUTION
-        g_context.ptr.reset(new VehicleDetectorAndClassifierPyWrapper(g_context.pyModulePath, g_context.modelPath));
+        if (g_context.ptr) delete g_context.ptr;
+        g_context.ptr = nullptr;
+        g_context.ptr = new VehicleDetectorAndClassifierPyWrapper(g_context.pyModulePath, g_context.modelPath);
         return 0;
     END_EXCEPTION_SAFE_EXECUTION
 }
@@ -141,8 +143,9 @@ int VehicleDCGetResult(int index, int *x, int *y, int *width, int *height,
 
 void VehicleDCRelease() {
     try {
-        g_context.ptr.reset(nullptr);
+        if (g_context.ptr) delete g_context.ptr;
     } catch (...) {}
+    g_context.ptr = nullptr;
     g_context.results.resize(0);
     g_context.errorString.resize(0);
 
