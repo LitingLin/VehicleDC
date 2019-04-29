@@ -10,7 +10,7 @@
 
 struct Context {
     std::string errorString;
-    VehicleDetectorAndClassifierPyWrapper *ptr;
+    VehicleDetectorAndClassifierPyWrapper *ptr = nullptr;
     std::string pyModulePath = VEHICLE_DC_PY_MODULE_PATH;
     std::string modelPath = VEHICLE_DC_MODEL_PATH;
     std::vector<VehicleDetectorAndClassifierPyWrapper::Result> results;
