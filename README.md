@@ -11,7 +11,7 @@ cmake ..
 make -j
 make install
 ```
-You can type ``` make test ``` to check if it is working properly. (libjpeg-turbo is required)
+Type ``` make test ``` to check if it is working properly. (libjpeg-turbo is required)
 # Usage
 In C/C++ source code
 ``` C++
@@ -23,3 +23,4 @@ CFLAGS=-I/usr/local/include
 CXXFLAGS=-I/usr/local/include
 LDFLAGS=-L/usr/local/lib -Wl,-rpath=/usr/local/lib -lVehicleDC
 ```
+You can find an example in ```test/test.cpp```.
