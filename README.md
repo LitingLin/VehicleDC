@@ -11,6 +11,7 @@ cmake ..
 make -j
 make install
 ```
+You can type ``` make test ``` to check if it is working properly. (libjpeg-turbo is required)
 # Usage
 In C/C++ source code
 ``` C++
