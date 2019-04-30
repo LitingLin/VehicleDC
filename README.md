@@ -1,6 +1,7 @@
 # VehicleDC
 # Requirement
-Python > 3 with pytorch numpy opencv pillow
+Python 3 with pytorch numpy opencv pillow
+NVIDIA GPU
 # Install
 ``` bash
 git clone https://github.com/LitingLin/VehicleDC.git --recursive --depth 1
