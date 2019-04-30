@@ -35,12 +35,8 @@ struct Result {
     VehicleDCOrientation orientation;
 };
 
-bool operator==(const BoundingBox &l, const BoundingBox &r) {
-    return l.x == r.x && l.y == r.y && l.width == r.width && l.height == r.height;
-}
-
 bool operator==(const Result &l, const Result &r) {
-    return l.boundingBox == r.boundingBox && l.type == r.type && l.color == r.color && l.orientation == r.orientation;
+    return memcmp(&l, &r, sizeof(Result)) == 0;
 }
 
 TEST_CASE("Common", "[common]") {
