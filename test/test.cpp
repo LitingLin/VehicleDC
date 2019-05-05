@@ -39,6 +39,15 @@ bool operator==(const Result &l, const Result &r) {
     return memcmp(&l, &r, sizeof(Result)) == 0;
 }
 
+std::ostream &operator<<(std::ostream &stream, Result &value) {
+    stream << "Bounding Box: [x: " << value.boundingBox.x << ", y: " << value.boundingBox.y
+           << ", width: " << value.boundingBox.width << ", height: " << value.boundingBox.height << "]. "
+           << "Vehicle Type: " << VehicleDCVehicleTypeToString(value.type) << ". "
+           << "Vehicle Color: " << VehicleDCVehicleColorToString(value.color) << ". "
+           << "Vehicle Orientation: " << VehicleDCVehicleOrientationToString(value.orientation) << ".";
+    return stream;
+}
+
 TEST_CASE("Common", "[common]") {
     std::vector<unsigned char> jpegImage = fileReadAll(std::string(TESTING_SOURCE_PATH) + "/0001.jpg");
     JpegDecompressor jpegDecompressor;
@@ -58,12 +67,14 @@ TEST_CASE("Common", "[common]") {
     REQUIRE(numberOfVehicleDetected == 16);
     std::vector<Result> results;
     results.reserve(numberOfVehicleDetected);
+    std::cout << "Predicted: " << numberOfVehicleDetected << " vehicle(s)." << std::endl;
     for (int i = 0; i < numberOfVehicleDetected; ++i) {
         Result result;
         VehicleDCGetResult(i, &result.boundingBox.x, &result.boundingBox.y,
                            &result.boundingBox.width, &result.boundingBox.height,
                            &result.type, &result.color, &result.orientation);
         results.push_back(result);
+        std::cout << "#" << i + 1 << ": " << result << std::endl;
     }
 
     VehicleDCRelease();
